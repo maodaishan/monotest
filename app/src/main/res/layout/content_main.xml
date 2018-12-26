@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.maods.monotest.MainActivity"
+    tools:showIn="@layout/activity_main">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="钱包管理"/>
+        <EditText
+            android:id="@+id/account"
+            android:layout_width="@dimen/editor_length_short"
+            android:layout_height="wrap_content"
+            android:hint="输入账户"/>
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="开始"/>
+        <!--Status info-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前状态:"
+            android:textSize="@dimen/text_font_big"/>
+        <TextView
+            android:id="@+id/info_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/info_rent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/info_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <!-- what you can do-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前可执行操作:"
+            android:textSize="@dimen/text_font_big"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/action_move"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="前进"/>
+            <EditText
+                android:id="@+id/step"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="步数，默认自动产生"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/action_pay_rent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="付租金"/>
+        <Button
+            android:id="@+id/action_buy_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="买当前城市"/>
+        <Button
+            android:id="@+id/action_reveal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提款"/>
+        <Button
+            android:id="@+id/setlogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置logo"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <!--system info-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="系统状态:"
+            android:textSize="@dimen/text_font_big"/>
+        <TextView
+            android:id="@+id/pool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:id="@+id/last_modified"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/whether_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/try_terminate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="尝试结束(只有合约主人才能执行)"/>
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重置游戏（只有合约主人才能执行）"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <!--City info-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前城市信息:"
+            android:textSize="@dimen/text_font_big"/>
+        <TextView
+            android:id="@+id/city_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/all_city_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看所有城市信息"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="操作执行结果："/>
+
+        <TextView
+            android:id="@+id/operation_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/monopoly_desc"/>
+        <CheckBox
+            android:id="@+id/not_show_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不再显示(你可以在...中重新阅读)"
+            android:checked="true"/>
+        <!--<Button
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定"/>-->
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>
+
+
+
