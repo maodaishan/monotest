@@ -416,6 +416,12 @@ public class EOSInfoActivity extends Activity {
                                 pref.edit().putString(mWalletName,pswd).commit();
                             }
                             mContent= String.format(EOSInfoActivity.this.getResources().getString(R.string.wallet_pswd_notify),pswd);
+                            EOSInfoActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mBtn.setEnabled(false);
+                                }
+                            });
                         }else{
                             mContent= EOSInfoActivity.this.getString(R.string.wallet_create_failed);
                         }
