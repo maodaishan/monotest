@@ -5,6 +5,7 @@ package com.maods.monotest;
  */
 
 public class Utils {
+    public static final int CITY_COUNT=100;
     private static final String CITY_NAMES[]={
             "东京",
             "纽约",

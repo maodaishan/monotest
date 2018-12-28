@@ -43,11 +43,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import io.plactal.eoscommander.data.wallet.EosWallet;
 import io.plactal.eoscommander.data.wallet.EosWalletManager;
@@ -102,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mWhetherStopView;
     private Button mTryTerminate;
     private Button mReset;
+    private Button mTestPool;
     private TextView mCityInfoView;
     private TextView mActionResultView;
     private Button mAllCityInfoView;
@@ -150,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         mWhetherStopView=findViewById(R.id.whether_stop);
         mTryTerminate=findViewById(R.id.try_terminate);
         mReset=findViewById(R.id.reset);
+        mTestPool=findViewById(R.id.test_pool);
         mCityInfoView=findViewById(R.id.city_info);
         mActionResultView=findViewById(R.id.operation_result);
         mAllCityInfoView=findViewById(R.id.all_city_info);
@@ -228,6 +234,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 handleSetLogo();
+            }
+        });
+
+        mTestPool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleTestPool();
             }
         });
 
@@ -552,6 +565,55 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+    private void handleTestPool(){
+        if(!mCitys.mAvailable || !mStats.mAvailable){
+            Toast.makeText(this,"City或Stats信息尚未获取",Toast.LENGTH_LONG).show();
+            return;
+        }
+        StringBuilder result=new StringBuilder();
+        String lastBuyer=null;
+        HashMap<String,Double> bonusByOwner=new HashMap<String,Double>();
+        double priceTotal=0;
+        int lastModifyTmp =0;
+        for(int i=0;i<Utils.CITY_COUNT;i++){
+            City city=mCitys.getCity(i);
+            if(!city.mAvailable){
+                continue;
+            }
+            if(bonusByOwner.containsKey(city.mOwner)){
+                Double price=bonusByOwner.get(city.mOwner);
+                price+=city.mPrice;
+                bonusByOwner.put(city.mOwner,price);
+            }else{
+                bonusByOwner.put(city.mOwner,city.mPrice);
+            }
+            priceTotal+=city.mPrice;
+            if(city.mLastModified>lastModifyTmp){
+                lastBuyer=city.mOwner;
+                lastModifyTmp=city.mLastModified;
+            }
+        }
+        double lastBuyerBonus=toFourDecimal(mStats.mPool*0.35);
+        double cityOwnersBonus=toFourDecimal(mStats.mPool*0.4);
+        result.append("最后一位购买城市玩家："+lastBuyer+" 可以得到奖金："+lastBuyerBonus+" EOS\n");
+        result.append("城市拥有者们可得到奖金：\n");
+        Iterator<Map.Entry<String,Double>> ite=bonusByOwner.entrySet().iterator();
+        while(ite.hasNext()){
+            Map.Entry<String,Double>entry=ite.next();
+            String owner=entry.getKey();
+            Double price=entry.getValue();
+            result.append(owner+","+toFourDecimal(cityOwnersBonus*(price/priceTotal))+" EOS\n\n");
+        }
+        result.append("开发者可得到："+String.valueOf(toFourDecimal(mStats.mPool-lastBuyerBonus-cityOwnersBonus)) +" EOS");
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setMessage(result.toString());
+        builder.setPositiveButton(android.R.string.ok,null);
+        builder.create().show();
+    }
+    private double toFourDecimal(double input){
+        BigDecimal bg = new BigDecimal(input);
+        return bg.setScale(4, BigDecimal.ROUND_DOWN).doubleValue();
+    }
     private void handleViewAllCitys(){
         Intent intent=new Intent();
         intent.setComponent(new ComponentName("com.maods.monotest","com.maods.monotest.AllCityInfoActivity"));
@@ -828,6 +890,11 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_desc:
                 showGameDescDialog();
+                break;
+            case R.id.action_hack_test:
+                Intent intent=new Intent();
+                intent.setComponent(new ComponentName("com.maods.monotest","com.maods.monotest.HacktestActivity"));
+                startActivity(intent);
                 break;
         }
         return true;

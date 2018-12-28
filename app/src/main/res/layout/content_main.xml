@@ -130,6 +130,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="重置游戏（只有合约主人才能执行）"/>
+        <Button
+            android:id="@+id/test_pool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="计算奖池分配"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"

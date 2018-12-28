@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EOS实际可以不通过前台，直接执行合约内的任何Action，本界面目的是模拟这种情形。以下是本游戏涉及到的所有可能的合约和Action，仅供测试"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <!--monopolygame contract test-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_font_big"
+                android:text="monopolygame合约，请选择要执行的Action"/>
+            <ListView
+                android:id="@+id/monopolylist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/edit1"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit2"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit3"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit4"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit5"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="签名:"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <EditText
+                        android:id="@+id/permission_actor"
+                        android:layout_width="@dimen/editor_length_short"
+                        android:layout_height="wrap_content" 
+                        android:hint="签名账号"/>
+                    <EditText
+                        android:id="@+id/permission_level"
+                        android:layout_width="@dimen/editor_length_short"
+                        android:layout_height="wrap_content"
+                        android:text="active"/>
+                </LinearLayout>
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/monoexec"
+                android:text="执行"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <!--eosio.token -> transfer -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="eosio.token->transfer，付租金，买城市，提款都通过这个，正常执行：\n
+付租金:from:玩家,to:monopolygame,quantity:租金,memo:pay_rent\n
+买城市:from:玩家，to:monopolygame,quantity:价格,memo:buy_city\n
+提款：from:monopoly,to:玩家，quantity:可提金额，memo:reveal\n
+注意提款需要有monopolygame的私钥才能执行成功，这应该是客户端发给服务端，由服务端发起的动作。\n
+测试时可以随意填，看是否有异常出现。"/>
+            <EditText
+                android:id="@+id/transfer_from"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content"
+                android:hint="转出者账号"/>
+            <EditText
+                android:id="@+id/transfer_to"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content"
+                android:hint="转入者账号"/>
+            <EditText
+                android:id="@+id/transfer_quantity"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content"
+                android:hint="转账数量（格式xx.xxxx,必须小数点后四位)"/>
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="@dimen/editor_length_short"
+                android:layout_height="wrap_content"></Spinner>
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="签名:"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <EditText
+                        android:id="@+id/trans_permission_actor"
+                        android:layout_width="@dimen/editor_length_short"
+                        android:layout_height="wrap_content"
+                        android:hint="签名账号"/>
+                    <EditText
+                        android:id="@+id/trans_permission_level"
+                        android:layout_width="@dimen/editor_length_short"
+                        android:layout_height="wrap_content"
+                        android:text="active"/>
+                </LinearLayout>
+            </LinearLayout>-->
+            <Button
+                android:id="@+id/trans_exec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确定"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <!--execute result-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="执行结果："/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/result"/>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
+
+
+

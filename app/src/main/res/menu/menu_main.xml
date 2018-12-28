@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="游戏说明"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_hack_test"
+        android:orderInCategory="101"
+        android:title="黑客测试模式"
+        app:showAsAction="never" />
 </menu>
